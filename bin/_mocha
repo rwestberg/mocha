@@ -604,8 +604,10 @@ program.compilers.forEach(c => {
 
 function getResolvePaths(dir) {
   const result = [];
-  while (dir.length > 1) {
+  let lastLength = Number.MAX_SAFE_INTEGER;
+  while (dir.length < lastLength) {
     result.push(path.join(dir, 'node_modules'));
+    lastLength = dir.length;
     dir = path.dirname(dir);
   }
   return result;
